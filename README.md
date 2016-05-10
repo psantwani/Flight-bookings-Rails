@@ -1,4 +1,4 @@
-Design screenshot
+# Design screenshot
 ![alt tag](https://raw.githubusercontent.com/silentx09/Flight-bookings---Rails/master/public/snapshot.jpg)
 
 # Project Description
