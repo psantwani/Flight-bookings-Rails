@@ -1,0 +1,13 @@
+<% if @users.blank? %>
+<% else %>
+<div id = "flight_users">
+	<h1>User list</h1>
+<% @users.each do |c| %>
+
+<div class='chatbox__user'>
+    <p class='chatTags'><%= c.name %></p>
+</div>
+
+<% end %>
+</div>
+<% end %>

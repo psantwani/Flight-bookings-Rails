@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Popular Destinations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>City</th>
+      <th>City code</th>
+      <th>Destination</th>
+      <th>Destination code</th>
+      <th>Is delete</th>
+      <th>Created at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @popular_destinations.each do |popular_destination| %>
+      <tr>
+        <td><%= popular_destination.city %></td>
+        <td><%= popular_destination.city_code %></td>
+        <td><%= popular_destination.destination %></td>
+        <td><%= popular_destination.destination_code %></td>
+        <td><%= popular_destination.is_delete %></td>
+        <td><%= popular_destination.created_at %></td>
+        <td><%= link_to 'Show', popular_destination %></td>
+        <td><%= link_to 'Edit', edit_popular_destination_path(popular_destination) %></td>
+        <td><%= link_to 'Destroy', popular_destination, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Popular destination', new_popular_destination_path %>

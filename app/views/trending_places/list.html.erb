@@ -1,0 +1,19 @@
+<% if @trending_places.blank? %>
+<ul id = "trending_places">
+</ul>
+<% else %>
+<ul id = "trending_places">
+  <% @trending_places.each do |c| %>
+  <li>
+    <div class = "trending">
+      <p class = "city_name" id = "popular_dest" ><%= c.name %></p>
+      <img src = "<%= image_url(c.picture) %>" class = "city_picture" />
+      <p><a id = "popular_find_flights" href = "#" onmousedown = "quickSearch(this)">Select</a></p>
+    </div>
+  </li>  
+
+  <% end %>
+</ul>
+
+<% end %>
+

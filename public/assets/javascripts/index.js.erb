@@ -1,0 +1,335 @@
+var originalAlert = "<input type=\"text\"  tabindex=\"3\" placeholder=\"Type here\" />"+
+	"<div class=\"sa-input-error\"></div>";
+var index = 0;	
+var departure_airport = "";
+var arrival_airport = "";
+var departure_time = "";
+var price_limit = "";
+var airline_preference = "";
+
+function pickupDrop(title, subtitle,element){
+	
+	$(".sweet-alert > fieldset").html(originalAlert);
+	var set1 = ["Departure", "Arrival"];
+	var set2 = ["Flying schedule", "Filters"];
+	var confirmBox = true;
+	if(title == "Passenger Info"){
+		confirmBox = false;
+	}
+	
+	swal({   	
+		title: title,   
+		text: subtitle,   
+		type: "input",   
+		showCancelButton: true,   
+		closeOnConfirm: confirmBox,   
+		animation: "slide-from-top",   
+		inputPlaceholder: "Type here" }, 
+		function(inputValue){   
+			if (inputValue === false) 
+				return false;      
+			else if (inputValue === "") {     
+				swal.showInputError("Kindly enter a name!");     
+				return false   
+			}      
+			else{				
+				if(set1.indexOf(title) != -1){
+					var newCardTitle = "";
+					if(title == "Departure"){
+						newCardTitle = "Flying from";
+						btn_click_events();
+					}
+					else{
+						newCardTitle = "Flying to";
+					}
+					changeSet1Card(inputValue, element.parentNode.parentNode, newCardTitle);
+				}
+				else if(set2.indexOf(title) != -1){					
+					var params = {};
+					if(title == "Flying schedule"){
+						params = {
+							"inputkey1" : "Departure Date",
+							"input1" : $('.inputValue1').val(),
+							"inputkey2" : "Return Date",
+							"input2" :  $('.inputValue2').val(),
+							"title" : "Flying dates"
+						}
+						departure_time = $("#departure_date").val();
+					}	
+					else{
+						params = {
+							"inputkey1" : "Price limit",
+							"input1" : "&#8377; " + $('.inputValue1').val(),
+							"inputkey2" : "Preferred Airlines",
+							"input2" :  $('.inputValue2').val(),
+							"title" : "Filters"
+						}
+						price_limit = $("#price_limit").val();
+						airline_preference = $("#airline_preference").val();
+					
+					}					
+					
+					changeSet2Card(params, element.parentNode.parentNode);										
+				}			
+			}
+			if(title == "Passenger Info"){
+				var pnr = makeid();
+				saveBooking(pnr);
+				swal("Happy journey!", 
+					"Booking PNR : "+pnr+" \n" + 
+					"Your e-ticket has been e-mailed. Thank you!"
+					, "success"); 			
+
+				// swal("Happy journey!", 
+				// 	"Booking PNR : PQR32C \n" + 
+				// 	"Passenger name : " + $('.inputValue1').val() + "\n" + 
+				// 	"Email id : " + $('.inputValue2').val() + "\n" +
+				// 	"Mobile no: " + $('.inputValue3').val() + "\n" + 
+				// 	"Nominee's mobile no : " + $('.inputValue4').val()				
+				// 	, "success"); 
+			}			
+		});			
+}
+
+function makeid()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+function saveBooking(pnr){	
+	$.ajax({
+        type: "POST",
+        dataType: "json",
+        url:'/bookings',
+        data: { "booking": 
+        	{
+        		"name" : $('.inputValue1').val(), 
+				"email_id" : $('.inputValue2').val(), 
+				"mobile" : $('.inputValue3').val(), 
+				"flight_id" : $("#cart").find('h1').html(), 
+				"pnr" : pnr, 
+				"price" : $("#cart").find('#price').html(),
+				"booking_status" : "Booked",
+				"nominee_mobile" : $('.inputValue4').val(),
+				"created_at" : Date.now()		
+        	}
+    	},        
+        success: function(data){  
+        	chat_users();                  
+			//alert("success")                        
+        },
+        error: function(err){
+        	//console.log(err);
+        }
+    });  
+}
+
+function airportPicker(element, type){
+	
+	if(type == 'departure'){
+		pickupDrop('Departure','Enter airport/city name',element);
+	}
+	else if(type == 'arrival'){
+		pickupDrop('Arrival','Enter airport/city name', element);
+	}
+	
+	var airportPickerDom = "<input type=\"text\" class=\"airport_input\" tabindex=\"3\" placeholder=\"Type here\" />"+
+	"<div class=\"sa-input-error\"></div>";
+	$(".sweet-alert > fieldset").html(airportPickerDom);	
+	autocomplete();
+	//btn_click_events();
+}
+
+function datePicker(element){	
+	pickupDrop('Flying schedule', 'Enter your journey dates', element);
+	var datePickerDom = "<input type=\"text\" tabindex=\"3\" placeholder=\"Type here\" style='display:none' value='Demo' />"+
+	"<div class=\"sa-input-error\"></div>"+
+	"<input type=\"date\" id='departure_date' tabindex=\"1\" placeholder=\"Departure on\" class='inputValue1'>" + 
+	"<input type=\"date\" id='return_date' tabindex=\"2\" placeholder=\"Return on\" class='inputValue2'>";
+	$(".sweet-alert > fieldset").html(datePickerDom);		
+}
+
+function filterPicker(element){
+	pickupDrop('Filters', 'Enter your preferences', element);
+	var datePickerDom = "<input type=\"text\" tabindex=\"3\" placeholder=\"Type here\" style='display:none' value='Demo' />"+
+	"<div class=\"sa-input-error\"></div>"+
+	"<input type=\"text\" placeholder=\"Price limit &#8377;\" id='price_limit' class='inputValue1' value=''>" + 
+	"<input type=\"text\" placeholder=\"Preferred airlines\" id='airline_preference' class='inputValue2' value=''>";
+	$(".sweet-alert > fieldset").html(datePickerDom);	
+}
+
+function passengerInfo(){
+	pickupDrop('Passenger Info', 'You entered the following details');
+	var datePickerDom = "<input type=\"text\" tabindex=\"3\" placeholder=\"Type here\" style='display:none' value='Demo' />"+
+	"<div class=\"sa-input-error\"></div>"+
+	"<input type=\"text\" tabindex=\"1\" placeholder=\"Full Name\" class='inputValue1'>" + 
+	"<input type=\"text\" tabindex=\"2\" placeholder=\"Email id\" class='inputValue2'>" + 
+	"<input type=\"text\" tabindex=\"3\" placeholder=\"Mobile No.\" class='inputValue3'>" + 
+	"<input type=\"text\" tabindex=\"4\" placeholder=\"Nominee's mobile no.\" class='inputValue4'>"; + 
+	$(".sweet-alert > fieldset").html(datePickerDom);
+}
+
+function changeSet1Card(city, element, title, quickSearch){
+	var card_type = "";
+	var index;	
+	if(typeof quickSearch != "undefined"){
+		index = city_list.indexOf(city);
+	}
+	else{
+		index = city_list.indexOf($(".airport_input")[0].value);
+	}
+	if(title ==  "Flying from"){
+		card_type = "Departure";
+	}
+	else if(title == "Flying to"){
+		card_type = "Arrival";
+	}		
+	var newCard = "<div class = \"trending\">" +
+		"<p class = \"city_name\" style='font-family : Raleway'>"+title+"</p>" +
+		"<img class = \"city_picture\" src = '"+city_picture[index]+"'/>" +
+		"<p><a style='font-family : Raleway; text-decoration : none' id = '" + card_type + "' href = \"#\" onclick=\"airportPicker(this, '"+card_type.toLowerCase()+"')\">"+city+"</a></p>" +
+		"</div>";
+	element.innerHTML = newCard;	
+}
+
+function changeSet2Card(params, element){
+	var link="";
+	if(params.input1 == ""){
+		params.input1 = "-";
+	}
+	if(params.input2 == ""){
+		params.input2 = "-";
+	}
+	if(params.title == "Flying dates"){
+		link = "<p style=\"margin-top: 50px;\"><a  href = '#'' style=\"text-decoration : none;\" onclick=\"datePicker(this)\">Set Dates</a></p>";
+	}
+	else if(params.title == "Filters"){
+		link = "<p style=\"margin-top: 50px;\"><a  href = '#'' style=\"text-decoration : none;\" onclick=\"filterPicker(this)\">Set Filters</a></p>";
+	}
+
+	var newCard = "<div class = \"trending\">" +
+		"<p class = \"city_name\" style=\"margin-bottom: 20px; margin-top: 15px;\">"+params.title+"</p>"+
+		"<p style='text-align:center' class = \"\">"+params.inputkey1+"</p>"+		
+		"<p style='text-align:center' class = \"\">"+params.input1+"</p>"+		
+		"<p style='text-align:center' class = \"\">"+params.inputkey2+"</p>"+		
+		"<p style='text-align:center' class = \"\">"+params.input2+"</p>"+		
+		link+
+		"</div>";
+	element.innerHTML = newCard;	
+	
+	flight_result();	
+}
+
+function autocomplete(){		
+	$(".airport_input").autocomplete({
+    	source: city_list
+	});
+	$(".ui-autocomplete").css("z-index", "2147483647");
+}
+
+function btn_click_events(){
+	
+    $.ajax({
+        type: "GET",
+        dataType: "html",
+        url:'/popular_destinations/list?city=' + $(".airport_input")[0].value + '',
+        success: function(data){                    
+            $('#favorite_places').html($(data).filter('#trending_places').html());            
+            stack_card();              
+        }
+    });  
+
+
+}
+
+function quickSearch(ele){
+	changeSet1Card($(ele).closest("p").prev().prev().html(),$("#set_arrival")[0], "Flying to", true);
+}
+
+function select_flight(){
+	$(".city_book").on('click', function(){
+		$("#cart").html("<li style=\"top: 0px; font-family: Raleway; touch-action: pan-x pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\" class=\"in-deck\">" + $(this).closest('li').html() + "</li>");
+		$("#cart").find('a').html("Pay Now");		
+		$("#cart").find('a').on("click", function(){
+			passengerInfo();
+		});
+		
+	})
+}
+
+
+
+function flight_result(){	
+	$.ajax({
+        type: "GET",
+        dataType: "html",
+        url:"/flights/list?departure_airport="+$("#Departure").html()+"&arrival_airport="+$("#Arrival").html()+"&departure_time="+departure_time+"&airline="+airline_preference+"&price="+price_limit,
+        success: function(data){                  	
+        	$('#midnight').html($(data).filter('#midnight_flights').html());                    	
+        	var lis = $("#midnight li").length;
+        	$('#morning').html($(data).filter('#morning_flights').html());            
+        	if($("#morning li").length > lis){lis = $("#morning li").length}
+        	$('#noon').html($(data).filter('#noon_flights').html());            
+        	if($("#noon li").length > lis){lis = $("#noon li").length}
+            $('#evening').html($(data).filter('#evening_flights').html());            
+        	if($("#evening li").length > lis){lis = $("#evening li").length}
+            document.getElementById("footer").style.marginTop = (400+lis*55).toString()+"px";        	
+            stack_card();
+            select_flight();            
+        }
+    });  
+}
+
+
+
+function moveList(ele){					
+	var myEle = ele;
+	var refEle = $("#" + $(ele).parent().attr('id') + " li:last-child")[0];
+	var myUl = 	$("#" + $(ele).parent().attr('id'));		
+}
+
+function stack_card(){
+    var stack;
+    var card;
+
+    stack = gajus.Swing.Stack();    
+
+    [].forEach.call(document.querySelectorAll('.stack li'), function (targetElement) {
+        var card = stack.createCard(targetElement);
+        targetElement.classList.add('in-deck');
+        card.on('throwout', function (e) {                    
+            targetElement.style.display = "none";
+        });
+    });
+
+    stack.on('throwout', function (e) {        
+        console.log(e.target.innerText || e.target.textContent, 'has been thrown out of the stack to the', e.throwDirection == 1 ? 'right' : 'left', 'direction.');                
+        e.target.classList.remove('in-deck');
+    });
+    
+
+    stack.on('throwin', function (e) {        
+        console.log(e.target.innerText || e.target.textContent, 'has been thrown into the stack from the', e.throwDirection == 1 ? 'right' : 'left', 'direction.');        
+        e.target.classList.add('in-deck');
+    });
+
+}
+
+function chat_users(){
+	$.ajax({
+        type: "GET",
+        dataType: "html",
+        url:'/bookings/user_list',
+        success: function(data){                    
+            $('#chat_user_list').html($(data).filter('#flight_users').html());                        
+        }
+    });  
+
+}
+

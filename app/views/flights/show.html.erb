@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Airline:</strong>
+  <%= @flight.airline %>
+</p>
+
+<p>
+  <strong>Departure airport:</strong>
+  <%= @flight.departure_airport %>
+</p>
+
+<p>
+  <strong>Arrival airport:</strong>
+  <%= @flight.arrival_airport %>
+</p>
+
+<p>
+  <strong>Departure time:</strong>
+  <%= @flight.departure_time %>
+</p>
+
+<p>
+  <strong>Arrival time:</strong>
+  <%= @flight.arrival_time %>
+</p>
+
+<p>
+  <strong>Flight status:</strong>
+  <%= @flight.flight_status %>
+</p>
+
+<p>
+  <strong>Rev departure time:</strong>
+  <%= @flight.rev_departure_time %>
+</p>
+
+<p>
+  <strong>Rev arrival time:</strong>
+  <%= @flight.rev_arrival_time %>
+</p>
+
+<p>
+  <strong>Is delete:</strong>
+  <%= @flight.is_delete %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @flight.created_at %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @flight.price %>
+</p>
+
+<%= link_to 'Edit', edit_flight_path(@flight) %> |
+<%= link_to 'Back', flights_path %>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email_id: MyString
+  mobile: MyString
+  flight_id: 1
+  pnr: MyString
+  price: MyString
+  booking_status: MyString
+  nominee_mobile: MyString
+  created_at: 2016-04-25 17:18:40
+
+two:
+  name: MyString
+  email_id: MyString
+  mobile: MyString
+  flight_id: 1
+  pnr: MyString
+  price: MyString
+  booking_status: MyString
+  nominee_mobile: MyString
+  created_at: 2016-04-25 17:18:40

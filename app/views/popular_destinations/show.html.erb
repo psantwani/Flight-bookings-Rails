@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>City:</strong>
+  <%= @popular_destination.city %>
+</p>
+
+<p>
+  <strong>City code:</strong>
+  <%= @popular_destination.city_code %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @popular_destination.destination %>
+</p>
+
+<p>
+  <strong>Destination code:</strong>
+  <%= @popular_destination.destination_code %>
+</p>
+
+<p>
+  <strong>Is delete:</strong>
+  <%= @popular_destination.is_delete %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @popular_destination.created_at %>
+</p>
+
+<%= link_to 'Edit', edit_popular_destination_path(@popular_destination) %> |
+<%= link_to 'Back', popular_destinations_path %>

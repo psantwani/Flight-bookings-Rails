@@ -1,0 +1,2 @@
+module TrendingPlacesHelper
+end

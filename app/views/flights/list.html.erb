@@ -1,0 +1,128 @@
+<%
+@@midnight_list = ""
+@@morning_list = ""
+@@noon_list = ""
+@@evening_list = ""
+%>
+
+<%
+def time_diff(start_time, end_time)
+  seconds_diff = (start_time - end_time).to_i.abs
+  hours = seconds_diff / 3600
+  seconds_diff -= hours * 3600
+  minutes = seconds_diff / 60
+  seconds_diff -= minutes * 60
+  seconds = seconds_diff
+  "#{hours.to_s.rjust(2, '0')}:#{minutes.to_s.rjust(2, '0')}:#{seconds.to_s.rjust(2, '0')}"
+end
+
+def category(flight_hour)
+	if flight_hour >=0 && flight_hour < 6
+		return "midnight_flights"
+	elsif flight_hour >= 6 && flight_hour < 12
+		return "morning_flights"
+	elsif flight_hour >= 12 && flight_hour < 18
+		return "noon_flights"
+	elsif flight_hour >= 18
+		return "evening_flights"	
+	end	
+end	
+
+def htmlString(c, count)
+
+# return "<li style='top : #{count*45}px; font-family: Raleway;'>
+# 	<div class = \"trending\">
+# 		<p class = \"city_name\" style=\"padding:5px;padding-top:0px;height: 30px;\"><span style=\"float:left\">&#8377; #{c.price}</span><span style=\"float:right\">#{c.airline}</span></p>		
+# 		<div class = \"flight_details\" style = \"height: 200px; font-size : 14px;\">
+# 			<p>Departute Time<br><b>#{c.departure_time.to_s.at(11..15)}</b></p>
+# 			<p>Arrival Time<br><b>#{c.arrival_time.to_s.at(11..15)}</b></p>			
+# 			<p>Travel Time<br><b>#{time_diff(c.arrival_time, c.departure_time).at(0..4)}</b></p>
+# 			<p>Flight Status<br><b>#{c.flight_status}</b></p>		
+# 		</div>
+# 		<p><a class = \"city_book\" href = \"#\">Select</a></p>
+# 	</div>
+# </li>"
+
+return "<li onmousedown = 'moveList(this)' class='flight_item' style='top : #{count*55}px; font-family: Raleway;'>
+	<div class = \"trending\">
+		<p class = \"city_name\" style=\"padding:5px;padding-top:0px;height: 40px;\"><span id='price' style=\"float:left\">&#8377; #{c.price}</span><span style=\"float:right\"><img src= '#{c.picture}' height = '30px' width = '80px' /></span></p>	
+		<div style= 'height = 30px; margin-top:10px; margin-bottom:10px; text-align:center'>		
+		</div>
+		<hr style='margin-top:0px;margin-bottom : 5px;'>
+		<div class = \"flight_details\" style = \"height: 180px; font-size : 14px;\">
+		<table style='width:90%;margin-left:10px;margin-right:10px'>
+		<tr style='line-height:30px'><td style='float:left'>Departute</td>
+		<td style='float:right'>#{c.departure_time.to_s.at(11..15)}</td>
+		</tr>
+		<tr style='line-height:30px'><td style='float:left'>Arrival</td>
+		<td style='float:right'>#{c.arrival_time.to_s.at(11..15)}</td>
+		</tr>
+		<tr style='line-height:30px'><td style='float:left'>Travel Time</td>
+		<td style='float:right'>#{time_diff(c.arrival_time, c.departure_time).at(0..4)}</td>
+		</tr>
+		<tr style='line-height:30px'><td style='float:left'>Flight Status</td>
+		<td style='float:right; color:green'>#{c.flight_status}</td>
+		</tr>
+		</table>				
+		</div>
+		<hr style='margin-top:0px;margin-bottom : 5px;'>		
+		<p><a class = \"city_book\" style='color:red'>Select</a></p>
+		<h1 style='display:none'>#{c.id}</h1>
+	</div>
+</li>"
+
+end	
+
+%>
+
+
+<% if @flights.blank? %>
+
+<ul id = "midnight_flights"> </ul>
+<ul id = "morning_flights"> </ul>
+<ul id = "noon_flights"> </ul>
+<ul id = "evening_flights"> </ul>
+
+<%
+else
+	midnight_count = 0
+	morning_count = 0
+	noon_count = 0
+	evening_count = 0
+
+	@flights.each do |c| 
+		cat = category(c.departure_time.to_s.at(11..12).to_i)		
+		case cat
+			when "midnight_flights"
+				@@midnight_list += htmlString(c, midnight_count)
+				midnight_count += 1
+			when "morning_flights"
+				@@morning_list += htmlString(c, morning_count)
+				morning_count += 1
+			when "noon_flights"
+				@@noon_list += htmlString(c, noon_count)
+				noon_count += 1
+			when "evening_flights"
+				@@evening_list += htmlString(c, evening_count)
+				evening_count += 1
+		end
+	end  
+%>
+
+<ul id = "midnight_flights">
+	<%= @@midnight_list.html_safe %>
+</ul>
+<ul id = "morning_flights">
+	<%= @@morning_list.html_safe %>
+</ul>
+<ul id = "noon_flights">
+	<%= @@noon_list.html_safe %>
+</ul>
+<ul id = "evening_flights">
+	<%= @@evening_list.html_safe %>
+</ul>
+
+<% end %>
+
+
+

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Trending Places</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Picture</th>
+      <th>Is delete</th>
+      <th>Created at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trending_places.each do |trending_place| %>
+      <tr>
+        <td><%= trending_place.name %></td>
+        <td><%= trending_place.picture %></td>
+        <td><%= trending_place.is_delete %></td>
+        <td><%= trending_place.created_at %></td>
+        <td><%= link_to 'Show', trending_place %></td>
+        <td><%= link_to 'Edit', edit_trending_place_path(trending_place) %></td>
+        <td><%= link_to 'Destroy', trending_place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Trending place', new_trending_place_path %>

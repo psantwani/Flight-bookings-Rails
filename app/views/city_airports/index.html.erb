@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing City Airports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>City</th>
+      <th>City code</th>
+      <th>Airport</th>
+      <th>Picture</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @city_airports.each do |city_airport| %>
+      <tr>
+        <td><%= city_airport.city %></td>
+        <td><%= city_airport.city_code %></td>
+        <td><%= city_airport.airport %></td>
+        <td><%= city_airport.picture %></td>
+        <td><%= link_to 'Show', city_airport %></td>
+        <td><%= link_to 'Edit', edit_city_airport_path(city_airport) %></td>
+        <td><%= link_to 'Destroy', city_airport, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New City airport', new_city_airport_path %>

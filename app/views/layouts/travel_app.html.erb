@@ -1,0 +1,126 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TravelApp</title>
+
+    <!-- Jquery-UI -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
+
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Raleway" %>
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" %>    
+    <link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/style.css">
+    
+
+    
+    <script src="http://localhost:3000/assets/javascripts/swing.js"></script>
+    <script src="http://localhost:3000/assets/javascripts/classList.js"></script>        
+    
+    <!-- Bootstrap -->
+    <%= stylesheet_link_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" %>            
+    <%= javascript_include_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" %>
+
+    <script src="http://localhost:3000/assets/javascripts/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/assets/stylesheets/sweetalert.css">        
+    
+</head>
+<body onload="load_data()">    
+    <div id="page-wrapper">
+
+        <!--header-->  
+        <%= render template: "layouts/header" %>
+        <!--header ends-->
+
+        <div class="container-fluid" id = "top_row_stack">
+
+            <!-- Trending -->
+            <div class="row">
+                <div class="col-sm-3">
+                    <div id="viewport">        
+                        <ul id = "favorite_places" class="stack" >                                                                                                 
+                     </ul>
+                 </div>    
+             </div>   
+             <!-- Trending ends -->
+
+             <!-- 4 static cards -->
+             <%= render template: "layouts/user_input" %>
+             <!-- 4 static cards ends-->
+
+         </div>
+     </div>
+
+    <div class="container-fluid" id = "flight_search_stack">
+   <!-- Flight Result row -->
+   <div class="row">    
+
+    <div class="col-sm-12" >   
+
+        <div class="col-sm-2" style="margin-right: 30px; margin-left: 10px;">
+            <div id="viewport">  
+                <p style="text-align:center; font-family:Raleway; font-weight:bold; font-size:20px;">00:00 - 06:00</p>      
+                <ul class="stack" id="midnight">
+
+                </ul>
+            </div>    
+        </div>
+
+        <div class="col-sm-2" style="margin-right: 30px; margin-left: 10px;">
+            <div id="viewport">  
+                <p style="text-align:center; font-family:Raleway; font-weight:bold; font-size:20px;">06:00 - 12:00</p>      
+                <ul class="stack" id="morning">
+
+                </ul>
+            </div>    
+        </div>
+
+        <div class="col-sm-2" style="margin-right: 30px; margin-left: 10px;">
+            <div id="viewport">  
+                <p style="text-align:center; font-family:Raleway; font-weight:bold; font-size:20px;">12:00 - 18:00</p>      
+                <ul class="stack" id="noon">
+
+                </ul>
+            </div>    
+        </div>
+
+        <div class="col-sm-2" style="margin-right: 30px; margin-left: 10px;">
+            <div id="viewport">  
+                <p style="text-align:center; font-family:Raleway; font-weight:bold; font-size:20px;">18:00 - 00:00</p>      
+                <ul class="stack" id="evening">
+
+                </ul>
+            </div>    
+        </div>
+
+         <div class="col-sm-2" style="margin-right: 30px; margin-left: 10px;">
+            <div id="viewport">  
+                <p style="text-align:center; font-family:Raleway; font-weight:bold; font-size:20px;">Cart</p>            
+                <ul class="stack" id = "cart">
+                    <!-- <li>
+                        <div class = "trending">
+                            <p class = "city_name" style="padding:5px;padding-top:0px"><span style="float:left">&#8377; 2500</span><span style="float:right">Jet</span></p>
+                            <img class = "city_picture" src = "<%= image_url('mumbai.jpg') %>" />
+                            <p><a class = "city_book" href = "#" onclick="passengerInfo()">Pay Now</a></p>
+                        </div>
+                    </li>       -->                        
+                </ul>
+            </div>    
+        </div>   
+
+    </div>
+    </div>
+</div>
+
+</div>   
+
+<div id="footer">
+      <div class="container" style="text-align:center">
+        <p class="credit">A Project by <a href="#">Piyush Santwani</a> .</p>
+      </div>
+    </div>
+
+
+ <script src="http://localhost:3000/assets/javascripts/api.js"></script>
+ <script src="http://localhost:3000/assets/javascripts/index.js.erb"></script>
+</body> 

@@ -1,0 +1,33 @@
+<%= form_for(@city_airport) do |f| %>
+  <% if @city_airport.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@city_airport.errors.count, "error") %> prohibited this city_airport from being saved:</h2>
+
+      <ul>
+      <% @city_airport.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :city_code %><br>
+    <%= f.text_field :city_code %>
+  </div>
+  <div class="field">
+    <%= f.label :airport %><br>
+    <%= f.text_field :airport %>
+  </div>
+  <div class="field">
+    <%= f.label :picture %><br>
+    <%= f.text_field :picture %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

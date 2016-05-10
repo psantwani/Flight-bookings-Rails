@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @trending_place.name %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @trending_place.picture %>
+</p>
+
+<p>
+  <strong>Is delete:</strong>
+  <%= @trending_place.is_delete %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @trending_place.created_at %>
+</p>
+
+<%= link_to 'Edit', edit_trending_place_path(@trending_place) %> |
+<%= link_to 'Back', trending_places_path %>
