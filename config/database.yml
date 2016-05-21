@@ -9,18 +9,13 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 #
-# default: &default
-#   adapter: mysql2
-#   encoding: utf8
-#   pool: 5
-#   username: "root"
-#   password: "root"
-#   socket: /tmp/mysql.sock
-
-adapter: postgresql
-  host: ec2-54-243-200-63.compute-1.amazonaws.com
-  username: thhwwwxkihxlsn
-  database: d7dr42pu0iq2qt
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: "root"
+  password: "root"
+  socket: /tmp/mysql.sock
 
 development:
   <<: *default
