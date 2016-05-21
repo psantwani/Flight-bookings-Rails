@@ -9,13 +9,18 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 #
-default: &default
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  username: "root"
-  password: "root"
-  socket: /tmp/mysql.sock
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   pool: 5
+#   username: "root"
+#   password: "root"
+#   socket: /tmp/mysql.sock
+
+adapter: postgresql
+  host: ec2-54-243-200-63.compute-1.amazonaws.com
+  username: thhwwwxkihxlsn
+  database: d7dr42pu0iq2qt
 
 development:
   <<: *default
@@ -40,7 +45,7 @@ test:
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-#   DATABASE_URL="mysql2://myuser:mypass@localhost/somedatabase"
+DATABASE_URL="postgres://thhwwwxkihxlsn:F8_3D57yNo-Yj8dbqpzh6VZe8E@ec2-54-243-200-63.compute-1.amazonaws.com:5432/d7dr42pu0iq2qt"
 #
 # You can use this database configuration with:
 #
