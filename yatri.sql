@@ -19,6 +19,8 @@
 -- Table structure for table `airlines`
 --
 
+USE `yatri`;
+
 DROP TABLE IF EXISTS `airlines`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -62,7 +64,7 @@ CREATE TABLE `bookings` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +73,7 @@ CREATE TABLE `bookings` (
 
 LOCK TABLES `bookings` WRITE;
 /*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
-INSERT INTO `bookings` VALUES (4,'Piyush Santwani','psantwani@gmail.com','9029537456',2,'ciWCX','₹ 4000','Booked','9226866454','2016-04-25 12:44:26','2016-04-25 12:44:26'),(5,'Shashank Vaibhav','undertaker123@gmail.com','3452323423',2,'KQjI4','₹ 4000','Booked','4523423443','2016-04-25 12:52:00','2016-04-25 17:02:47'),(7,'Sanchit Jain','sanchitjain@gmail.com','9133408343',2,'mEbTm','₹ 4000','Booked','82340234923','2016-04-25 17:27:01','2016-04-25 17:27:01'),(8,'Dheeraj Prajapati','dprajapati@gmail.com','9045345321',2,'zrDRf','₹ 4000','Booked','8924234233','2016-04-25 17:39:05','2016-04-25 17:39:05'),(9,'Geetika Jain','geetika.jain@gmail.com','932843923',2,'DUOMw','₹ 4000','Booked','7834234193','2016-04-25 17:39:54','2016-04-25 17:39:54'),(10,'Dheeraj Prajapati','dp@gmail.com','924242342454',5,'UyChC','₹ 3090','Booked','932352423423','2016-04-27 10:57:52','2016-04-27 10:57:52'),(11,'Rita Santwani','rsantwani@gmail.com','9226866354',2,'LuFOM','₹ 4000','Booked','9029353434','2016-04-27 13:04:41','2016-04-27 13:04:41');
+INSERT INTO `bookings` VALUES (4,'Piyush Santwani','psantwani@gmail.com','9029537456',2,'ciWCX','₹ 4000','Booked','9226866454','2016-04-25 12:44:26','2016-04-25 12:44:26'),(5,'Shashank Vaibhav','undertaker123@gmail.com','3452323423',2,'KQjI4','₹ 4000','Booked','4523423443','2016-04-25 12:52:00','2016-04-25 17:02:47'),(7,'Sanchit Jain','sanchitjain@gmail.com','9133408343',2,'mEbTm','₹ 4000','Booked','82340234923','2016-04-25 17:27:01','2016-04-25 17:27:01'),(8,'Dheeraj Prajapati','dprajapati@gmail.com','9045345321',2,'zrDRf','₹ 4000','Booked','8924234233','2016-04-25 17:39:05','2016-04-25 17:39:05'),(9,'Geetika Jain','geetika.jain@gmail.com','932843923',2,'DUOMw','₹ 4000','Booked','7834234193','2016-04-25 17:39:54','2016-04-25 17:39:54'),(10,'Dheeraj Prajapati','dp@gmail.com','924242342454',5,'UyChC','₹ 3090','Booked','932352423423','2016-04-27 10:57:52','2016-04-27 10:57:52'),(11,'Rita Santwani','rsantwani@gmail.com','9226866354',2,'LuFOM','₹ 4000','Booked','9029353434','2016-04-27 13:04:41','2016-04-27 13:04:41'),(12,'Panda','panda@gmail.com','9234234239',2,'G5Kdk','₹ 4000','Booked','2923420133','2016-05-21 11:01:50','2016-05-21 11:01:50');
 /*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-21 15:40:40
+-- Dump completed on 2016-05-27 18:13:50
