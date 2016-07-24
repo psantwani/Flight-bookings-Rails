@@ -106,7 +106,7 @@ function saveBooking(pnr){
 	$.ajax({
         type: "POST",
         dataType: "json",
-        url:'/bookings',
+        url:'http://localhost:3000/bookings',
         data: { "booking": 
         	{
         		"name" : $('.inputValue1').val(), 
@@ -240,7 +240,7 @@ function btn_click_events(){
     $.ajax({
         type: "GET",
         dataType: "html",
-        url:'/popular_destinations/list?city=' + $(".airport_input")[0].value + '',
+        url:'http://localhost:3000/popular_destinations/list?city=' + $(".airport_input")[0].value + '',
         success: function(data){                    
             $('#favorite_places').html($(data).filter('#trending_places').html());            
             stack_card();              
@@ -327,7 +327,7 @@ function chat_users(){
 	$.ajax({
         type: "GET",
         dataType: "html",
-        url:'/bookings/user_list',
+        url:'http://localhost:3000/bookings/user_list',
         success: function(data){                    
             $('#chat_user_list').html($(data).filter('#flight_users').html());                        
         }
