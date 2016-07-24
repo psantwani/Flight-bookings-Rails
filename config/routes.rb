@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/', :to => 'app#index'
   post '/bookings/save', :to => 'bookings#create'
   get '/bookings/user_list', :to => 'bookings#user_list'
   get '/flights/list', :to => 'flights#list'

@@ -5,24 +5,24 @@
 
     <!-- Jquery-UI -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>    
 
-    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Raleway" %>
-    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" %>    
-    <link rel="stylesheet" href="http://localhost:3000/assets/stylesheets/style.css">
+    <%= stylesheet_link_tag "//fonts.googleapis.com/css?family=Raleway" %>
+    <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" %>    
+    <link rel="stylesheet" href= "<%= ENV['ASSET_URL'] %>assets/stylesheets/style.css">
     
 
     
-    <script src="http://localhost:3000/assets/javascripts/swing.js"></script>
-    <script src="http://localhost:3000/assets/javascripts/classList.js"></script>        
+    <script src="<%= ENV['ASSET_URL'] %>assets/javascripts/swing.js"></script>
+    <script src="<%= ENV['ASSET_URL'] %>assets/javascripts/classList.js"></script>        
     
     <!-- Bootstrap -->
-    <%= stylesheet_link_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" %>            
-    <%= javascript_include_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" %>
+    <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" %>            
+    <%= javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" %>
 
-    <script src="http://localhost:3000/assets/javascripts/sweetalert.min.js"></script> 
-    <link rel="stylesheet" type="text/css" href="http://localhost:3000/assets/stylesheets/sweetalert.css">        
+    <script src="<%= ENV['ASSET_URL'] %>assets/javascripts/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="<%= ENV['ASSET_URL'] %>assets/stylesheets/sweetalert.css">        
     
 </head>
 <body onload="load_data()">    
@@ -97,13 +97,7 @@
             <div id="viewport">  
                 <p style="text-align:center; font-family:Raleway; font-weight:bold; font-size:20px;">Cart</p>            
                 <ul class="stack" id = "cart">
-                    <!-- <li>
-                        <div class = "trending">
-                            <p class = "city_name" style="padding:5px;padding-top:0px"><span style="float:left">&#8377; 2500</span><span style="float:right">Jet</span></p>
-                            <img class = "city_picture" src = "<%= image_url('mumbai.jpg') %>" />
-                            <p><a class = "city_book" href = "#" onclick="passengerInfo()">Pay Now</a></p>
-                        </div>
-                    </li>       -->                        
+                                      
                 </ul>
             </div>    
         </div>   
@@ -121,6 +115,6 @@
     </div>
 
 
- <script src="http://localhost:3000/assets/javascripts/api.js"></script>
- <script src="http://localhost:3000/assets/javascripts/index.js.erb"></script>
+ <script src="<%= ENV['ASSET_URL'] %>assets/javascripts/api.js"></script>
+ <script src="<%= ENV['ASSET_URL'] %>assets/javascripts/index.js.erb"></script>
 </body> 

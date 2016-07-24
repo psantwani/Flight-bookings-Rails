@@ -131,15 +131,17 @@ function saveBooking(pnr){
 }
 
 function airportPicker(element, type){
-	
+	var value;
 	if(type == 'departure'){
 		pickupDrop('Departure','Enter airport/city name',element);
+		value="Banglore";
 	}
 	else if(type == 'arrival'){
 		pickupDrop('Arrival','Enter airport/city name', element);
+		value="Mumbai";
 	}
 	
-	var airportPickerDom = "<input type=\"text\" class=\"airport_input\" tabindex=\"3\" placeholder=\"Type here\" />"+
+	var airportPickerDom = "<input value='" + value + "' id='" + type + "_sweetalert' type=\"text\" class=\"airport_input\" tabindex=\"3\" placeholder=\"Type here\" />"+
 	"<div class=\"sa-input-error\"></div>";
 	$(".sweet-alert > fieldset").html(airportPickerDom);	
 	autocomplete();
@@ -150,7 +152,7 @@ function datePicker(element){
 	pickupDrop('Flying schedule', 'Enter your journey dates', element);
 	var datePickerDom = "<input type=\"text\" tabindex=\"3\" placeholder=\"Type here\" style='display:none' value='Demo' />"+
 	"<div class=\"sa-input-error\"></div>"+
-	"<input type=\"date\" id='departure_date' tabindex=\"1\" placeholder=\"Departure on\" class='inputValue1'>" + 
+	"<input type=\"date\" id='departure_date' tabindex=\"1\"  value='2016-04-23'  placeholder=\"Departure on\" class='inputValue1'>" + 
 	"<input type=\"date\" id='return_date' tabindex=\"2\" placeholder=\"Return on\" class='inputValue2'>";
 	$(".sweet-alert > fieldset").html(datePickerDom);		
 }
@@ -332,4 +334,3 @@ function chat_users(){
     });  
 
 }
-
