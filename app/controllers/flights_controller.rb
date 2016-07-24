@@ -6,7 +6,7 @@ class FlightsController < ApplicationController
     sql_str = ""
 
     if params[:price] != ""      
-      sql_str += " AND CAST(flights.price AS UNSIGNED) <= #{params[:price]}"
+      sql_str += " AND CAST(flights.price AS Integer) <= #{params[:price]}"
     end 
     
     if params[:airline] != ""
