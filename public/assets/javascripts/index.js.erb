@@ -106,7 +106,7 @@ function saveBooking(pnr){
 	$.ajax({
         type: "POST",
         dataType: "json",
-        url:'http://localhost:3000/bookings',
+        url:'https://localhost:3000/bookings',
         data: { "booking": 
         	{
         		"name" : $('.inputValue1').val(), 
@@ -240,7 +240,7 @@ function btn_click_events(){
     $.ajax({
         type: "GET",
         dataType: "html",
-        url:'http://localhost:3000/popular_destinations/list?city=' + $(".airport_input")[0].value + '',
+        url:'https://localhost:3000/popular_destinations/list?city=' + $(".airport_input")[0].value + '',
         success: function(data){                    
             $('#favorite_places').html($(data).filter('#trending_places').html());            
             stack_card();              
@@ -271,7 +271,7 @@ function flight_result(){
 	$.ajax({
         type: "GET",
         dataType: "html",
-        url:"/flights/list?departure_airport="+$("#Departure").html()+"&arrival_airport="+$("#Arrival").html()+"&departure_time="+departure_time+"&airline="+airline_preference+"&price="+price_limit,
+        url:"https://localhost:3000/flights/list?departure_airport="+$("#Departure").html()+"&arrival_airport="+$("#Arrival").html()+"&departure_time="+departure_time+"&airline="+airline_preference+"&price="+price_limit,
         success: function(data){                  	
         	$('#midnight').html($(data).filter('#midnight_flights').html());                    	
         	var lis = $("#midnight li").length;
@@ -327,7 +327,7 @@ function chat_users(){
 	$.ajax({
         type: "GET",
         dataType: "html",
-        url:'http://localhost:3000/bookings/user_list',
+        url:'https://localhost:3000/bookings/user_list',
         success: function(data){                    
             $('#chat_user_list').html($(data).filter('#flight_users').html());                        
         }
